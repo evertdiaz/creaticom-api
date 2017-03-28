@@ -13,7 +13,7 @@ app.use(cors())
 
 app.use('/', controller)
 
-mongoose.connect('mongodb://admin:admin@ds127958.mlab.com:27958/heroku_ssbp2zsj')
+mongoose.connect('mongodb://admin:admin@ds060369.mlab.com:60369/creaticomdb')
 
 app.listen('3000', () => {
   console.log('Servidor iniciado en 5000')
