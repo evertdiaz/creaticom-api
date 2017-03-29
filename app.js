@@ -5,6 +5,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const controller = require('./controller')
 const app = express()
+const port = process.env.PORT || 3000
 
 app.use(bp.urlencoded({ extended: false }))
 app.use(bp.json())
@@ -15,6 +16,6 @@ app.use('/', controller)
 
 mongoose.connect('mongodb://articom-network.cloudapp.net:27017/articomdb')
 
-app.listen('3000', () => {
-  console.log('Servidor iniciado en 5000')
+app.listen(port, () => {
+  console.log('Servidor iniciado en ' + port)
 })
