@@ -13,7 +13,7 @@ app.use(cors())
 
 app.use('/', controller)
 
-mongoose.connect('articom-network.cloudapp.net/articomdb')
+mongoose.connect('mongodb://articom-network.cloudapp.net:27017/articomdb')
 
 app.listen('3000', () => {
   console.log('Servidor iniciado en 5000')
