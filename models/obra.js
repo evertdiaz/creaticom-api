@@ -6,6 +6,7 @@ module.exports = mongoose.model('obra', {
   description: String,
   month: String,
   year: Number,
+  img: String,
   author: {
     type: Schema.ObjectId,
     ref: 'user'
@@ -13,5 +14,9 @@ module.exports = mongoose.model('obra', {
   category: {
     type: Schema.ObjectId,
     ref: 'category'
+  },
+  subcategory: {
+    type: Schema.ObjectId,
+    ref: 'subcategory'
   }
 })
