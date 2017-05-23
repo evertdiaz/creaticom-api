@@ -6,7 +6,7 @@ module.exports = mongoose.model('obra', {
   description: String,
   month: String,
   year: Number,
-  img: String,
+  mainImg: String,
   author: {
     type: Schema.ObjectId,
     ref: 'user'

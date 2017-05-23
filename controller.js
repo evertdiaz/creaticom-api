@@ -76,11 +76,13 @@ router.get('/user/:id', (req, res) => {
 router.post('/obra', (req, res) => {
   var newObra = new Obra()
   newObra.name = req.body.name
+  newObra.mainImg = req.body.mainImg
   newObra.description = req.body.description
   newObra.month = req.body.month
   newObra.year = req.body.year
   newObra.author = req.body.author
   newObra.subcategory = req.body.subcategory
+  console.log('LLEGÓ: ', req.body)
   newObra.save((err, obraSaved) => {
     if (err) return res.send(err)
     // El valor del id reemplazarlo por el que viene en el req
