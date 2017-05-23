@@ -1,6 +1,7 @@
 var express = require('express')
 var router = express.Router()
 var Category = require('./models/category')
+var SubCategory = require('./models/subcategory')
 var User = require('./models/user')
 var Obra = require('./models/obra')
 
@@ -79,7 +80,7 @@ router.post('/obra', (req, res) => {
   newObra.month = req.body.month
   newObra.year = req.body.year
   newObra.author = req.body.author
-  newObra.category = req.body.category
+  newObra.subcategory = req.body.subcategory
   newObra.save((err, obraSaved) => {
     if (err) return res.send(err)
     // El valor del id reemplazarlo por el que viene en el req
@@ -107,7 +108,12 @@ router.post('/auth', (req, res) => {
 router.get('/obras', (req, res) => {
   Obra
   .find()
-  .populate('category author')
+  .populate('author')
+  .populate(
+  {
+    path: 'subcategory',
+    populate: { path: 'category' }
+  })
   .exec((err, foundObras) => {
     if (err) return res.send(err)
       res.send(foundObras)
@@ -155,6 +161,13 @@ router.get('/category', (req, res) => {
   Category.find((err, foundCategories) => {
     if (err) return res.send(err)
     res.status(200).send(foundCategories)
+  })
+})
+
+router.get('/subcategory', (req, res) => {
+  SubCategory.find((err, foundSubCategories) => {
+    if (err) return res.send(err)
+    res.status(200).send(foundSubCategories)
   })
 })
 

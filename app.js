@@ -5,7 +5,7 @@ const mongoose = require('mongoose')
 const cors = require('cors')
 const controller = require('./controller')
 const app = express()
-const port = process.env.PORT || 6000
+const port = process.env.PORT || 8000
 
 app.use(bp.urlencoded({ extended: false }))
 app.use(bp.json())
