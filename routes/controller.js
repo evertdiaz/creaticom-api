@@ -25,6 +25,9 @@ router.get('/obrasfull', (req, res) => {
     path: 'subcategory',
     populate: { path: 'category' }
   })
+  .exec((err, foundObras) => {
+    res.send(foundObras)
+  })
 })
 
 router.get('/categoriasfull', (req, res) => {
