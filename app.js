@@ -3,16 +3,18 @@ const bp = require('body-parser')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
 const cors = require('cors')
-const controller = require('./controller')
 const app = express()
+const cookieParser = require('cookie-parser')
 const port = process.env.PORT || 8000
 
 app.use(bp.urlencoded({ extended: false }))
 app.use(bp.json())
 app.use(morgan('dev'))
 app.use(cors())
+app.use(cookieParser())
 
-app.use('/', controller)
+var apiController = require('./routes/controller')
+app.use('/api', apiController)
 
 mongoose.connect('mongodb://articom-network.cloudapp.net:27017/articomdb')
 

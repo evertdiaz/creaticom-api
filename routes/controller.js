@@ -1,12 +1,45 @@
 var express = require('express')
 var router = express.Router()
-var Category = require('./models/category')
-var SubCategory = require('./models/subcategory')
-var User = require('./models/user')
-var Obra = require('./models/obra')
+var Category = require('../models/category')
+var SubCategory = require('../models/subcategory')
+var User = require('../models/user')
+var Obra = require('../models/obra')
+// var ObjectId = require('mongoose').Types.ObjectId
+// var ObjectId = require('mongodb').BSONPure.ObjectID
+
+String.prototype.toObjectId = function() {
+  var ObjectId = (require('mongoose').Types.ObjectId);
+  return new ObjectId(this.toString());
+};
+// console.log('545f489dea12346454ae793b'.toObjectId());
+
 
 router.get('/', (req, res) => {
   res.send('Welcome')
+})
+
+router.get('/obrasfull', (req, res) => {
+  Obra
+  .find()
+  .populate({
+    path: 'subcategory',
+    populate: { path: 'category' }
+  })
+})
+
+router.get('/categoriasfull', (req, res) => {
+  Category.find((err, categorias) => {
+    res.send(categorias)
+  })
+})
+
+router.get('/subcategoriasfull', (req, res) => {
+  SubCategory
+  .find()
+  .populate('category')
+  .exec((err, foundCategories) => {
+    res.send(foundCategories)
+  })
 })
 
 router.post('/category', (req, res) => {
