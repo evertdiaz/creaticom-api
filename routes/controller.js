@@ -21,6 +21,7 @@ router.get('/', (req, res) => {
 router.get('/obrasfull', (req, res) => {
   Obra
   .find()
+  .populate('author')
   .populate({
     path: 'subcategory',
     populate: { path: 'category' }
@@ -33,6 +34,22 @@ router.get('/obrasfull', (req, res) => {
 router.get('/categoriasfull', (req, res) => {
   Category.find((err, categorias) => {
     res.send(categorias)
+  })
+})
+
+router.get('/obra/category/:name', (req, res) => {
+  Category
+  .findOne({name: req.params.name})
+  .exec((err, foundCategory) => {
+    res.send(foundCategory)
+  })
+})
+
+router.get('/obra/subcategory/:name', (req, res) => {
+  SubCategory
+  .findOne({name: req.params.name})
+  .exec((err, foundCategory) => {
+    res.send(foundCategory)
   })
 })
 
